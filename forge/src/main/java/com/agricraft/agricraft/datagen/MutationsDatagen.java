@@ -151,7 +151,7 @@ public class MutationsDatagen {
 		pamhc2crops(context, "tealeaf", "minecraft:seagrass", "pamhc2crops:soybean");
 		pamhc2crops(context, "tomatillo", "pamhc2crops:tomato", "pamhc2crops:eggplant");
 		pamhc2crops(context, "tomato", "pamhc2crops:sweetpotato", "minecraft:carrot");
-		pamhc2crops(context, "turnip", "pamhc2crops:parsnip", "minecraft:radish");
+		pamhc2crops(context, "turnip", "pamhc2crops:parsnip", "pamhc2crops:radish");
 		pamhc2crops(context, "waterchestnut", "pamhc2crops:sesameseeds", "minecraft:seagrass");
 		pamhc2crops(context, "whitemushroom", "minecraft:red_mushroom", "minecraft:brown_mushroom");
 		pamhc2crops(context, "wintersquach", "minecraft:pumpkin", "pamhc2crops:zucchini");

@@ -23,6 +23,10 @@ public final class CompatConfig {
 	@Comment("Set to false to disable compatibility with Mystical Agriculture (in case things break)")
 	public static boolean enableMysticalAgriculture = true;
 
+	@ConfigEntry(id = "pneumaticcraft", type = EntryType.BOOLEAN, translation = "config.agricraft.compat.pneumaticcraft")
+	@Comment("If true, harvesting drones will be able to harvest AgriCraft crops")
+	public static boolean enablePneumaticCraft = true;
+
 	@ConfigEntry(id = "industrialforegoing", type = EntryType.BOOLEAN, translation = "config.agricraft.compat.industrialforegoing")
 	@Comment("If set to true, plant gatherer will be able to harvest AgriCraft crops")
 	public static boolean enableIndustrialForegoing = true;

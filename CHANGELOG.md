@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.20.1-4.0.6
+
+- ADDED: PNC:R Harvesting Drones support (PiotrO15)
+- ADDED: Industrial Foregoing support (PiotrO15)
+- FIXED: annotate emi plugin with EmiEntrypoint (unilock)
+- FIXED: reduce particles when breaking crop sticks (PiotrO15)
+- FIXED: crop blocks not being horn harvestable in forge (PiotrO15)
+- FIXED: typos in mutations jsons (Wyrdix)
+- FIXED: Crash when using the clipper via automation (joakime)
+- FIXED: typos in pamhc2crops mutations jsons (Minerofmillions)
+
 ## 1.20.1-4.0.5
 
 - FIXED: crash when mystical agriculture is not present

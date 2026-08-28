@@ -329,7 +329,7 @@ public class CropRequirementCategory implements IRecipeCategory<CropRequirementC
 		private AgriGrowthStage currentStage;
 		private List<Block> soils;
 		private int soil;
-		private List<BlockState> blocksBelow = new ArrayList<>();
+		private List<BlockState> blocksBelow;
 		private int blockBelow;
 
 		public Recipe(AgriPlant plant) {
@@ -345,19 +345,16 @@ public class CropRequirementCategory implements IRecipeCategory<CropRequirementC
 		}
 
 		private void updateBlocks() {
-			//TODO: Replace with flatmap
-			this.blocksBelow.retainAll(Collections.emptyList());
-			plant.getGrowthRequirements().blockConditions().stream()
-				.filter(e -> e.strength() > this.currentStrength)
-				.distinct()
-				.toList()
-				.forEach(c -> {
-					Platform.get().getBlocksFromLocation(c.block()).forEach(b -> {
-						BlockState blockOut = b.defaultBlockState();
-						//TODO: apply block states as given in c.states()
-						this.blocksBelow.add(blockOut);
-					});
-				});
+			this.blocksBelow = plant.getGrowthRequirements().blockConditions().stream()
+					.filter(e -> e.strength() > this.currentStrength)
+					.flatMap(c -> Platform.get().getBlocksFromLocation(c.block()).stream()
+							.map(b -> {
+								BlockState stateOut = b.defaultBlockState();
+								//TODO: apply block states as given in c.states()
+								return stateOut;
+							}))
+					.distinct()
+					.toList();
 			this.blockBelow = 0;
 		}
 

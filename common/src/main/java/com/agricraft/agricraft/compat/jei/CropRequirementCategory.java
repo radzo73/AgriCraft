@@ -2,7 +2,6 @@ package com.agricraft.agricraft.compat.jei;
 
 import com.agricraft.agricraft.api.AgriApi;
 import com.agricraft.agricraft.api.AgriClientApi;
-import com.agricraft.agricraft.api.codecs.AgriBlockCondition;
 import com.agricraft.agricraft.api.crop.AgriGrowthStage;
 import com.agricraft.agricraft.api.plant.AgriPlant;
 import com.agricraft.agricraft.api.codecs.AgriSoilCondition;
@@ -41,8 +40,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.BooleanSupplier;
 
@@ -346,15 +343,11 @@ public class CropRequirementCategory implements IRecipeCategory<CropRequirementC
 
 		private void updateBlocks() {
 			this.blocksBelow = plant.getGrowthRequirements().blockConditions().stream()
-					.filter(e -> e.strength() > this.currentStrength)
-					.flatMap(c -> Platform.get().getBlocksFromLocation(c.block()).stream()
-							.map(b -> {
-								BlockState stateOut = b.defaultBlockState();
-								//TODO: apply block states as given in c.states()
-								return stateOut;
-							}))
-					.distinct()
-					.toList();
+				.filter(bc -> bc.strength() > this.currentStrength)
+				.flatMap(bc -> Platform.get().getBlocksFromLocation(bc.block()).stream()
+					.map(Block::defaultBlockState)) //TODO: apply block states as given in c.states() (whenever blockstates work)
+				.distinct()
+				.toList();
 			this.blockBelow = 0;
 		}
 

@@ -176,7 +176,7 @@ public class CropRequirementCategory implements IRecipeCategory<CropRequirementC
 		PoseStack stack = guiGraphics.pose();
 		stack.pushPose();
 		Lighting.setupForFlatItems();
-		stack.translate(56, 52, 0);
+		stack.translate(56, 60, 0);
 		stack.translate(-4, 12, 0);
 		stack.scale(16, -16, 1);
 		stack.mulPose(Axis.XP.rotationDegrees(45));
@@ -188,8 +188,8 @@ public class CropRequirementCategory implements IRecipeCategory<CropRequirementC
 			stack.pushPose();
 			Minecraft.getInstance().getBlockRenderer().renderSingleBlock(recipe.blocksBelow.get(recipe.blockBelow), stack, bufferSource, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
 			stack.popPose();
-			stack.translate(0, 1, 0);
 		}
+		stack.translate(0, 1, 0);
 		// render soil
 		if (!recipe.soils.isEmpty() && recipe.soil < recipe.soils.size()) {
 			stack.pushPose();
@@ -274,29 +274,19 @@ public class CropRequirementCategory implements IRecipeCategory<CropRequirementC
 				offset += NUTRIENTS_OFFSETS[i];
 			}
 		}
-		if (recipe.blocksBelow.isEmpty()){
-			if (50 <= mouseX && mouseX <= 76 && 34 <= mouseY && mouseY <= 58) {
-				Component desc = LangUtils.plantDescription(recipe.plantId);
-				return desc == null ? List.of(LangUtils.plantName(recipe.plantId)) : List.of(LangUtils.plantName(recipe.plantId), desc);
-			}
-			if (50 <= mouseX && mouseX <= 76 && 58 <= mouseY && mouseY <= 74) {
-				return Screen.getTooltipFromItem(Minecraft.getInstance(), new ItemStack(recipe.soils.get(recipe.soil)));
-			}
+		if (50 <= mouseX && mouseX <= 76 && 20 <= mouseY && mouseY <= 44) {
+			Component desc = LangUtils.plantDescription(recipe.plantId);
+			return desc == null ? List.of(LangUtils.plantName(recipe.plantId)) : List.of(LangUtils.plantName(recipe.plantId), desc);
 		}
-		else{
-			if (50 <= mouseX && mouseX <= 76 && 20 <= mouseY && mouseY <= 44) {
-				Component desc = LangUtils.plantDescription(recipe.plantId);
-				return desc == null ? List.of(LangUtils.plantName(recipe.plantId)) : List.of(LangUtils.plantName(recipe.plantId), desc);
-			}
-			if (50 <= mouseX && mouseX <= 76 && 44 <= mouseY && mouseY <= 60) {
-				return Screen.getTooltipFromItem(Minecraft.getInstance(), new ItemStack(recipe.soils.get(recipe.soil)));
-			}
-			if (50 <= mouseX && mouseX <= 76 && 60 <= mouseY && mouseY <= 76) {
-				return Screen.getTooltipFromItem(Minecraft.getInstance(), new ItemStack(
-						recipe.blocksBelow.get(recipe.blockBelow).getBlock().asItem()
-				));
-			}
+		if (50 <= mouseX && mouseX <= 76 && 44 <= mouseY && mouseY <= 60) {
+			return Screen.getTooltipFromItem(Minecraft.getInstance(), new ItemStack(recipe.soils.get(recipe.soil)));
 		}
+		if (50 <= mouseX && mouseX <= 76 && 60 <= mouseY && mouseY <= 76 && !recipe.blocksBelow.isEmpty()) {
+			return Screen.getTooltipFromItem(Minecraft.getInstance(), new ItemStack(
+					recipe.blocksBelow.get(recipe.blockBelow).getBlock().asItem()
+			));
+		}
+
 		if (AgriApi.getSeasonLogic().isActive()) {
 			if (17 <= mouseX && mouseX <= 29 && 24 <= mouseY && mouseY <= 36) {
 				return List.of(LangUtils.seasonName(AgriSeason.SPRING));
